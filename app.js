@@ -27,29 +27,38 @@ const data = [
 
 const profiles = profileIterator(data);
 
+// Call first profile
+nextProfile();
+
 // Next event
 document.getElementById('next').addEventListener('click', nextProfile);
 
 // Next profile display
 function nextProfile() {
   const currentProfile = profiles.next().value;
+  // console.log(currentProfile);
+
+  // const { name, image, age, gender, lookingfor, location } = currentProfile;
+
   console.log(currentProfile);
 
-  document.getElementById('imageDisplay').innerHTML = `
-  <ul class="list-group">
+  if (currentProfile !== undefined) {
+    document.getElementById('imageDisplay').innerHTML = `
     <img src=${currentProfile.image} alt="profile picture"/>
-  </ul>
-  `;
+    `;
 
-  document.getElementById('profileDisplay').innerHTML = `
-  <ul class="list-group">
-    <li class="list-group-item text-center">Name: ${currentProfile.name}</li>
-    <li class="list-group-item text-center">Age: ${currentProfile.age}</li>
-    <li class="list-group-item text-center">Gender: ${currentProfile.gender}</li>
-    <li class="list-group-item text-center">Looking For: ${currentProfile.lookingfor}</li>
-    <li class="list-group-item text-center">Location: ${currentProfile.location}</li>
+    document.getElementById('profileDisplay').innerHTML = `
+    <ul class="list-group">
+    <li class="list-group-item">Name: ${currentProfile.name}</li>
+    <li class="list-group-item">Age: ${currentProfile.age}</li>
+    <li class="list-group-item">Gender: ${currentProfile.gender}</li>
+    <li class="list-group-item">Looking For: ${currentProfile.lookingfor}</li>
+    <li class="list-group-item">Location: ${currentProfile.location}</li>
     </ul>
-  `;
+    `;
+  } else {
+    window.location.reload();
+  }
 }
 
 // Profile iterator
